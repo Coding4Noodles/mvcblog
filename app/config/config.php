@@ -12,4 +12,4 @@
     define('URLROOT', 'http://localhost/mvcblog');
 
     //Sitename
-    define('SITENAME', 'Digital Solutions');
+    define('SITENAME', 'The Dev life');

@@ -13,7 +13,7 @@
                 Create a post
             </a>
         </div>
-        <main>
+        <article>
             <?php foreach($data['posts'] as $post): ?>               
                 <div class="blogpost">
                     <h2>
@@ -42,7 +42,7 @@
             <?php endforeach; ?>
             <?php else: ?>
                 <h1>Blog</h1>
-                <main>
+                <article>
                     <?php foreach($data['posts'] as $post): ?>
                         <div class="blogpost">
                             <h2>
@@ -60,8 +60,8 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
-                </main>
-        </main>
+                    </article>
+        </article>
     <?php endif; ?>            
 </div>
 

@@ -9,8 +9,20 @@
 
 
 <div class="container">
-   <h1>About page</h1>
-   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et sunt ipsum in quas! Nisi tenetur provident nam, mollitia quos harum, minima asperiores distinctio sit alias consectetur non doloribus dolores blanditiis nihil optio, sunt ullam eum. Beatae omnis aperiam cumque quod perferendis, praesentium expedita doloremque repudiandae recusandae, sit voluptates ea reiciendis incidunt officiis a aut nesciunt vero tempora ducimus! Alias delectus optio ipsum. Facere illo, quia odit dignissimos labore natus similique!</p>
+   <div class="content-landing">
+      <div class="content-text">
+         <h1>Who are we?</h1>
+         <p>Devlife is a platform which loves to show the latest development technologies. 
+         Devlife is a non profit organisation that just wants to give back to the developer community. </p>
+      </div>
+      <div class="content-img">
+      <?php if(isLoggedIn()):  ?>
+                <img src="../public/img/give-back.svg" alt="giveback">
+            <?php else : ?>
+                <img src="public/img/give-back.svg" alt="giveback">
+            <?php endif; ?>
+      </div>
+   </div>
 </div>
 
 <?php

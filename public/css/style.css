@@ -229,7 +229,7 @@ nav ul li a:hover {
 
 .blogpost {
     border: 1px solid;
-    max-width: 470px;
+    margin: 50px 100px;
     padding: 10px 20px;
     display: flex;
     flex-direction: column;
@@ -587,6 +587,9 @@ main {
         gap: 10px;
         justify-content: center;
     }
+    .blogpost {
+        margin: 25px;
+    }
 }
 
 @media only screen and (max-width: 960px) {
@@ -595,5 +598,8 @@ main {
         grid-template-columns: 1fr;
         gap: 10px;
         justify-content: center;
+    }
+    .blogpost {
+        margin: 10px;
     }
 }
