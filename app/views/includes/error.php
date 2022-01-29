@@ -1,4 +1,5 @@
-<?php 
+<?php
+// Error helper function to error_log certain blocks of code..
 function logger($log) {
     // check if file already exists
     if(!file_exists('log.txt', '')) {

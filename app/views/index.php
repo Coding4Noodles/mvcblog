@@ -9,7 +9,7 @@
 <div class="container">
     <div class="content-landing">
         <div class="content-text">
-            <h1>Devlife</h1>
+            <h1>Devlife is here</h1>
             <p>Do you like to stay up to date with the latest trends and features? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus nemo ut est voluptatum qui et neque nostrum amet! Dolorem unde esse tenetur quibusdam, dure sequi, alias repellat natus omnis sunt architecto! Adipisci accusantium ratione consectetur quaerat officiis!</p>
         </div>
         <div class="content-img">
