@@ -7,6 +7,7 @@
    require APPROOT . '/views/includes/navigation.php';
 ?>
 
+
 <?php
    // validate the form
    $errorMsg = null;
@@ -27,7 +28,7 @@
 
 <div class="container">
    <h1>Contact Us</h1>
-   
+
    <div class="error-message">
       <?php 
          if(!is_null($errorMsg)) {
@@ -53,6 +54,7 @@
       </div>
    </form>
 </div>
+
 
 <?php
    require APPROOT . '/views/includes/footer.php';
