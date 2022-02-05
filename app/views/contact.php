@@ -33,6 +33,7 @@
       <?php 
          if(!is_null($errorMsg)) {
             echo $errorMsg;
+            error_log("user made an error in the signup process", 0);
          }
       ?>   
    </div>
