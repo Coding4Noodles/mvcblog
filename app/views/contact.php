@@ -58,5 +58,5 @@
 
 
 <?php
-   require APPROOT . '/views/includes/footer.php';
+   require APPROOT.'/views/includes/footer.php';
 ?>

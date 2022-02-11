@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<dataset>
+	<table name="contact">
+		<column>Contact_ID</column>
+		<column>fname</column>
+		<column>email</column>
+		<row>
+			<value>1</value>
+			<value>Dan</value>
+			<value>gameking@hotmail.com</value>			
+		</row>
+		<row>
+			<value>2</value>
+			<value>Joe</value>
+			<value>Wesley@hotmail.com</value>
+		</row>
+	</table>
+</dataset>

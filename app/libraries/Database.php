@@ -23,6 +23,11 @@
             }
         }
 
+        public function getConnection()
+        {
+            return $this->dbHandler;
+        }
+
         //Allows us to write queries
         public function query($sql) {
             $this->statement = $this->dbHandler->prepare($sql);
