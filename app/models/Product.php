@@ -7,6 +7,7 @@ class Product {
     }
 
     public function findAllProducts() {
+        $this->db->beginTransaction();
         $this->db->query('SELECT * FROM products ORDER BY created_at ASC');
 
         $results = $this->db->resultSet();
@@ -32,6 +33,7 @@ class Product {
        
         move_uploaded_file($fileTmpName, $filePath);
 
+        $this->db->beginTransaction();
         $this->db->query('INSERT INTO products (user_id, title, descr, itemlink, imgPath) VALUES (:user_id, :title, :descr, :itemlink, :imgPath)');
 
         $this->db->bind(':user_id', $data['user_id']);
@@ -48,6 +50,7 @@ class Product {
     }
 
     public function findProductById($id) {
+        $this->db->beginTransaction();
         $this->db->query('SELECT * FROM products WHERE id = :id');
 
         $this->db->bind(':id', $id);
@@ -58,6 +61,7 @@ class Product {
     }
 
     public function updateProduct($data) {
+        $this->db->beginTransaction();
         $this->db->query('UPDATE products SET title = :title, descr = :descr, itemlink = :itemlink WHERE id = :id');
 
         $this->db->bind(':id', $data['id']);
@@ -73,6 +77,7 @@ class Product {
     }
 
     public function deleteProduct($id) {
+        $this->db->beginTransaction();
         $this->db->query('DELETE FROM products WHERE id = :id');
 
         $this->db->bind(':id', $id);

@@ -6,6 +6,7 @@ class User {
     }
 
     public function register($data) {
+        $this->db->beginTransaction();
         $this->db->query('INSERT INTO users (username, email, account, password) VALUES(:username, :email, :account, :password)');
 
         //Bind values
@@ -23,6 +24,7 @@ class User {
     }
 
     public function login($username, $password) {
+        $this->db->beginTransaction();
         $this->db->query('SELECT * FROM users WHERE username = :username');
 
         //Bind value
@@ -42,6 +44,7 @@ class User {
 
     //Find user by email. Email is passed in by the Controller.
     public function findUserByEmail($email) {
+        $this->db->beginTransaction();
         //Prepared statement
         $this->db->query('SELECT * FROM users WHERE email = :email');
 
