@@ -7,6 +7,7 @@ class Post {
     }
 
     public function findAllPosts() {
+        $this->db->beginTransaction();
         $this->db->query('SELECT * FROM posts ORDER BY created_at ASC');
 
         $results = $this->db->resultSet();
@@ -15,6 +16,7 @@ class Post {
     }
 
     public function addPost($data) {
+        $this->db->beginTransaction();
         $this->db->query('INSERT INTO posts (user_id, title, body) VALUES (:user_id, :title, :body)');
 
         $this->db->bind(':user_id', $data['user_id']);
@@ -29,6 +31,7 @@ class Post {
     }
 
     public function findPostById($id) {
+        $this->db->beginTransaction();
         $this->db->query('SELECT * FROM posts WHERE id = :id');
 
         $this->db->bind(':id', $id);
@@ -39,6 +42,7 @@ class Post {
     }
 
     public function updatePost($data) {
+        $this->db->beginTransaction();
         $this->db->query('UPDATE posts SET title = :title, body = :body WHERE id = :id');
 
         $this->db->bind(':id', $data['id']);
@@ -53,7 +57,7 @@ class Post {
     }
 
     public function deletePost($id) {
-
+        $this->db->beginTransaction();
         $this->db->query('SELECT * FROM posts WHERE id = :id');
 
         $this->db->bind(':id', $id);
@@ -61,7 +65,8 @@ class Post {
         if ($this->db->execute()) {
             $data = $this->db->single();
             $this->addToDeleted($data);
-
+            
+            $this->db->beginTransaction();
             $this->db->query('DELETE FROM posts WHERE id = :id');
             $this->db->bind(':id', $id);
             $this->db->execute();
@@ -72,6 +77,7 @@ class Post {
     }
 
     public function addToDeleted($data){
+        $this->db->beginTransaction();
         $this->db->query('INSERT INTO deletedposts (user_id, title, body) VALUES (:user_id, :title, :body)');
 
         $this->db->bind(':user_id', $data->user_id);

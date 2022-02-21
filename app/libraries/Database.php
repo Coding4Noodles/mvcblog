@@ -28,6 +28,13 @@
             return $this->dbHandler;
         }
 
+        //Begin transaction
+        public function beginTransaction() {
+            // Start TCL commit, rollback, => autosave off 
+            // Save commits, make sql query
+            $this->dbHandler->beginTransaction();
+        }
+
         //Allows us to write queries
         public function query($sql) {
             $this->statement = $this->dbHandler->prepare($sql);
@@ -51,9 +58,31 @@
             $this->statement->bindValue($parameter, $value, $type);
         }
 
+        //TCL Commit
+        public function commit() {
+            // "give" to db on execute
+            $this->dbHandler->commit();
+        }
+
         //Execute the prepared statement
         public function execute() {
-            return $this->statement->execute();
+            //trigger exception in a "try" block
+            try {
+                $this->statement->execute();
+                $this->commit();
+                return true;
+            } 
+            //catch exception
+            catch(Exception $e) {
+                $this->rollback();
+                echo 'Message: ' .$e->getMessage();
+                exit();
+            } 
+        }
+
+        public function rollback() {
+            // Rollback to restore 'buffer' 
+            $this->dbHandler->rollback();
         }
 
         //Return an array

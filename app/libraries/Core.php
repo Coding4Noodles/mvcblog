@@ -14,6 +14,11 @@
 
       $url = $this->getUrl();
 
+      //IF EMPTY, RESOLVE IT AS "INDEX"
+      if (empty($url)) {
+        $url[0] = "index";
+      }
+
       // Look in BLL for first value
       if(file_exists('../app/controllers/' . ucwords($url[0]). '.php')){
         // If exists, set as controller

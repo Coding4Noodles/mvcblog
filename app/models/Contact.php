@@ -7,6 +7,7 @@
     }
 
     function submit() {
+      $this->db->beginTransaction();
       $this->db->query('INSERT INTO contact (fname, email) VALUES(:fname, :email)');
 
       //Bind values

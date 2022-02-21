@@ -1,18 +1,22 @@
 <?php
+    //HEADER REDIRECTION AS FIRST BEFORE OUTPUTTING ANYTHING.
+    //UPON OUTPUT HEADER CAN/WILL FAIL
+    if(isset($_SESSION['account']) && $_SESSION['account'] == 'author') {
+        header('Location:' . URLROOT . '/pages/index');
+        exit();
+    } elseif ($_SESSION['account'] !== 'admin' && $_SESSION['account'] !== 'author') {
+        header('Location:' . URLROOT . '/index');
+        exit();
+    }
+?>
+
+<?php
    require APPROOT . '/views/includes/head.php';
 ?>
 
 
 <?php
     require APPROOT . '/views/includes/navigation.php';
-?>
-
-<?php
-    if(isset($_SESSION['account']) && $_SESSION['account'] == 'author'):
-        header('location:' . URLROOT . '/pages/index');
-    elseif (!$_SESSION['account'] == 'admin' && !$_SESSION['account'] == 'author') :
-        header('location:' . URLROOT . '/index');
-    endif;
 ?>
 
 <div class="container">
