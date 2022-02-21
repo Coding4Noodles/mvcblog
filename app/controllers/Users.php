@@ -38,63 +38,77 @@ class Users extends Controller {
 
             $nameValidation = "/^[a-zA-Z0-9]*$/";
             $passwordValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i";
+            $killScript = false;
 
             //Validate username on letters/numbers
             if (empty($data['username'])) {
                 $data['usernameError'] = 'Please enter username.';
+                $killScript = true;
             } elseif (!preg_match($nameValidation, $data['username'])) {
                 $data['usernameError'] = 'Name can only contain letters and numbers.';
+                $killScript = true;
             }
 
             //Validate email
             if (empty($data['email'])) {
                 $data['emailError'] = 'Please enter email address.';
+                $killScript = true;
             } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
                 $data['emailError'] = 'Please enter the correct format.';
+                $killScript = true;
             } else {
                 //Check if email exists.
                 if ($this->userModel->findUserByEmail($data['email'])) {
-                $data['emailError'] = 'Email is already taken.';
+                    $data['emailError'] = 'Email is already taken.';
+                    $killScript = true;
                 }
             }
 
             //check select fields
             if (empty($data['account'])) {
                 $data['accountError'] = 'Please choose the account type.';
+                $killScript = true;
             } elseif (!preg_match($nameValidation, $data['account'])) {
                 $data['accountError'] = 'Name can only contain letters and numbers.';
+                $killScript = true;
             }
 
             // Validate password on length, numeric values,
             if(empty($data['password'])){
               $data['passwordError'] = 'Please enter password.';
+              $killScript = true;
             } elseif(strlen($data['password']) < 6){
               $data['passwordError'] = 'Password must be at least 8 characters';
+              $killScript = true;
             } elseif (preg_match($passwordValidation, $data['password'])) {
               $data['passwordError'] = 'Password must be have at least one numeric value.';
+              $killScript = true;
             }
 
             //Validate confirm password
              if (empty($data['confirmPassword'])) {
                 $data['confirmPasswordError'] = 'Please enter password.';
+                $killScript = true;
             } else {
                 if ($data['password'] != $data['confirmPassword']) {
                 $data['confirmPasswordError'] = 'Passwords do not match, please try again.';
+                $killScript = true;
                 }
             }
-
-            // Make sure that errors are empty
-            if (empty($data['usernameError']) && empty($data['emailError']) && empty($data['accountError']) && empty($data['passwordError']) && empty($data['confirmPasswordError'])) {
-
+            
+            //THIS WAY ALL THE REQUIRED CHECKS ARE STILL DONE AND ASSIGNED, BUT NO REDUNDANT CHECKS ARE PERFORMED
+            if (!$killScript) {
                 // Hash password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 //Register user from model function
-                if ($this->userModel->register($data)) {
+                if ($resolve = $this->userModel->register($data)) {
                     //Redirect to index
-                    header('location: ' . URLROOT . '/pages/index');
+                    header('Location: ' . URLROOT . '/pages/index');
                 } else {
-                    die('Something went wrong.');
+                    //CHANGE TO OWN LIKING
+                    var_dump("Requesting... " . $resolve);
+                    exit();
                 }
             }
         }
@@ -160,7 +174,7 @@ class Users extends Controller {
         $_SESSION['username'] = $user->username;
         $_SESSION['email'] = $user->email;
         $_SESSION['account'] = $user->account;
-        header('location:' . URLROOT . '/pages/index');
+        header('Location:' . URLROOT . '/pages/index');
     }
 
     public function logout() {
@@ -168,6 +182,6 @@ class Users extends Controller {
         unset($_SESSION['username']);
         unset($_SESSION['email']);
         unset($_SESSION['account']);
-        header('location:' . URLROOT . '/users/login');
+        header('Location:' . URLROOT . '/users/login');
     }
 }

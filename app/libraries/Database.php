@@ -70,14 +70,19 @@
             try {
                 $this->statement->execute();
                 $this->commit();
+                return true;
             } 
             //catch exception
             catch(Exception $e) {
-                // Rollback to restore 'buffer' 
-                $this->dbHandler->rollback();
+                $this->rollback();
                 echo 'Message: ' .$e->getMessage();
                 exit();
             } 
+        }
+
+        public function rollback() {
+            // Rollback to restore 'buffer' 
+            $this->dbHandler->rollback();
         }
 
         //Return an array
